@@ -96,6 +96,6 @@ The Retrieval-Augmented Generation (RAG) pipeline enables accurate knowledge ret
 
    ## 🌐 7. Deliverables
 
-   ### GitHub Repository: https://github.com/Kaveesha358/srilanka-ecotourism-agentic-ai/tree/main
+   * ** GitHub Repository**: https://github.com/Kaveesha358/srilanka-ecotourism-agentic-ai/tree/main
 
-   ### Live Streamlit App: https://srilanka-ecotourism-agentic-ai-2f3hh3bksi7ckwkwvvente.streamlit.app/
+   * ** Live Streamlit App**: https://srilanka-ecotourism-agentic-ai-2f3hh3bksi7ckwkwvvente.streamlit.app/
