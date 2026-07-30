@@ -1,5 +1,5 @@
 import streamlit as st
-from agents.router_agent import orchestrator_app
+from orchestrator import orchestrator_app
 
 st.set_page_config(page_title="AI Agent Orchestration System", page_icon="🤖")
 
@@ -14,7 +14,7 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 if prompt := st.chat_input("Ask about park rules, general details, or calculate entrance fees..."):
-    
+
     st.chat_message("user").markdown(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
 
@@ -23,6 +23,6 @@ if prompt := st.chat_input("Ask about park rules, general details, or calculate 
             initial_state = {"user_query": prompt}
             result = orchestrator_app.invoke(initial_state)
             response_text = result.get("final_response", "Sorry, I couldn't process that.")
-            
+
             st.markdown(response_text)
             st.session_state.messages.append({"role": "assistant", "content": response_text})
