@@ -21,12 +21,12 @@ Always use the calculator tool when numerical calculations or fee estimates are 
 compliance_agent = create_agent(
     model=llm,
     tools=[calculate_park_fee],
-    prompt=compliance_system_prompt
+    system_prompt=compliance_system_prompt
 )
 
 def compliance_agent_node(state: dict) -> dict:
     user_query = state.get("user_query", "")
     response = compliance_agent.invoke({"messages": [HumanMessage(content=user_query)]})
-    
+
     final_output = response["messages"][-1].content
     return {"final_response": final_output}
