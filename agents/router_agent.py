@@ -1,10 +1,9 @@
 import os
-from google.colab import userdata
-
 from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage
 
-os.environ["GROQ_API_KEY"] = userdata.get('GROQ_API_KEY')
+if "GROQ_API_KEY" not in os.environ:
+    os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY", "")
 
 llm = ChatGroq(
     model="llama-3.1-8b-instant",
@@ -14,7 +13,7 @@ llm = ChatGroq(
 def router_classifier_node(state: dict) -> dict:
     """Classifies user query to determine routing."""
     query = state["user_query"]
-    
+
     prompt = f"""
     Analyze the user request and categorize it into exactly one of these two options:
     - 'compliance': If the query asks about fees, calculations, rules, restrictions, or itinerary validation.
@@ -24,8 +23,8 @@ def router_classifier_node(state: dict) -> dict:
 
     User Request: {query}
     """
-    
+
     response = llm.invoke([HumanMessage(content=prompt)]).content.strip().lower()
     next_step = "compliance" if "compliance" in response else "retriever"
-    
+
     return {"next_step": next_step}
